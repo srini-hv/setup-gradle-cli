@@ -21,17 +21,18 @@ export async function getGradle(version: string) {
 }
 
 async function downloadGradle(version: string): Promise<string> {
-  var downloadUrl = `https://gradle.org/next-steps/?version=${version}&format=bin`;
+  var downloadUrl = `https://services.gradle.org/distributions/gradle-${version}-bin.zip`;
   var tool = 'gradle';
+  var toolDirectoryName = `gradle-${version}-bin`
   core.debug(`downloading ${downloadUrl}`);
 
   try {
     const downloadPath = await tc.downloadTool(downloadUrl);
     core.debug(`downloadPath = '${downloadPath}'`);
-    const fullPath = path.join(downloadPath,`gradle-${version}-bin`)
-    const extractedPath = await tc.extractZip(fullPath);
+    // const fullPath = path.join(downloadPath,`gradle-${version}-bin.zip`)
+    const extractedPath = await tc.extractZip(downloadPath);
     core.debug(`extractedPath = '${extractedPath}'`);
-    let toolRoot = path.join(extractedPath, tool);
+    let toolRoot = path.join(extractedPath, toolDirectoryName);
     core.debug(`toolRoot = '${toolRoot}'`);
     return await tc.cacheDir(toolRoot, tool, version);
   } catch (err) {
