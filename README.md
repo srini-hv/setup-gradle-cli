@@ -5,7 +5,6 @@ Action to set up [Gradle CLI](https://gradle.org/) and add it to the `PATH`.
 
 This Action enables you to run Gradle CLI commands as part of your workflow.
 
-
 ## Example
 
 ```yaml
