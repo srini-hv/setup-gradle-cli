@@ -23,7 +23,7 @@ export async function getGradle(version: string) {
 async function downloadGradle(version: string): Promise<string> {
   var downloadUrl = `https://services.gradle.org/distributions/gradle-${version}-bin.zip`;
   var tool = 'gradle';
-  var toolDirectoryName = `gradle-${version}-bin`
+  var toolDirectoryName = `gradle-${version}`
   core.debug(`downloading ${downloadUrl}`);
 
   try {
