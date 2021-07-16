@@ -52,7 +52,8 @@ async function downloadGradle(version) {
     try {
         const downloadPath = await tc.downloadTool(downloadUrl);
         core.debug(`downloadPath = '${downloadPath}'`);
-        const extractedPath = await tc.extractZip(downloadPath);
+        const fullPath = path.join(downloadPath, `gradle-${version}-bin`);
+        const extractedPath = await tc.extractZip(fullPath);
         core.debug(`extractedPath = '${extractedPath}'`);
         let toolRoot = path.join(extractedPath, tool);
         core.debug(`toolRoot = '${toolRoot}'`);
