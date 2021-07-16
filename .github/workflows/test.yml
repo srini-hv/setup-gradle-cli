@@ -32,8 +32,8 @@ jobs:
         with:
           gradle-version: "7.1.1"
       - run: | 
-        gradle -v
-        which gradle
+          gradle -v
+          which gradle
 
       # Test setup default version
       - uses: ./
