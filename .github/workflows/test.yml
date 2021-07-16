@@ -1,0 +1,38 @@
+name: "Tests"
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  unit:
+    name: npm test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - run: npm ci
+
+  integ:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-18.04
+          - ubuntu-20.04
+          - macos-10.15
+          - windows-latest
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+
+    #Test setup specific version
+      - uses: ./
+        with:
+          tekton-version: "7.1.1"
+      - run: gradle -v
+
+      # Test setup default version
+      - uses: ./
+      - run: gradle -v | grep -F 7.1

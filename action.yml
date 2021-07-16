@@ -1,0 +1,9 @@
+name: 'Setup Gradle CLI'
+description: 'Install a specific version of Gradle and add it to the PATH'
+inputs:
+  gradle-version:
+    description: 'Version Spec of the version to use.'
+    default: '7.1'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
